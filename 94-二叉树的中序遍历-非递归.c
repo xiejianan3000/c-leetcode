@@ -4,7 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct TreeNode {
+struct TreeNode
+{
   int val;
   struct TreeNode *left;
   struct TreeNode *right;
@@ -13,7 +14,8 @@ struct TreeNode {
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
-int *inorderTraversal(struct TreeNode *root, int *returnSize) {
+int *inorderTraversal(struct TreeNode *root, int *returnSize)
+{
   int sz = 1024, nans = 0;
   int *ans = (int *)malloc(sizeof(int) * sz);
 
@@ -21,12 +23,15 @@ int *inorderTraversal(struct TreeNode *root, int *returnSize) {
   struct TreeNode *stack[512];
 
   struct TreeNode *ptr = root;
-  while (1) {
-    while (ptr) {
+  while (1)
+  {
+    while (ptr)
+    {
       stack[nstack++] = ptr;
       ptr = ptr->left;
     }
-    if (nstack == 0) {
+    if (nstack == 0)
+    {
       break;
     }
     ptr = stack[--nstack];

@@ -2,14 +2,17 @@
 
 #include <stdlib.h>
 
-struct TreeNode {
+struct TreeNode
+{
   int val;
   struct TreeNode *left;
   struct TreeNode *right;
 };
 
-struct TreeNode *dps(int *nums, int i, int j) {
-  if (i > j) {
+struct TreeNode *dps(int *nums, int i, int j)
+{
+  if (i > j)
+  {
     return NULL;
   }
 
@@ -21,6 +24,7 @@ struct TreeNode *dps(int *nums, int i, int j) {
   return node;
 }
 
-struct TreeNode *sortedArrayToBST(int *nums, int numsSize) {
+struct TreeNode *sortedArrayToBST(int *nums, int numsSize)
+{
   return dps(nums, 0, numsSize - 1);
 }

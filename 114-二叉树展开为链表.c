@@ -3,13 +3,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct TreeNode {
+struct TreeNode
+{
   int val;
   struct TreeNode *left;
   struct TreeNode *right;
 };
 
-void flatten(struct TreeNode *root) {
+void flatten(struct TreeNode *root)
+{
   int arr_sz = 1024;
   int narr = 0;
   struct TreeNode **arr =
@@ -19,9 +21,12 @@ void flatten(struct TreeNode *root) {
   struct TreeNode *stack[512];
 
   struct TreeNode *ptr = root;
-  while (1) {
-    while (ptr) {
-      if (narr == arr_sz) {
+  while (1)
+  {
+    while (ptr)
+    {
+      if (narr == arr_sz)
+      {
         arr_sz *= 2;
         struct TreeNode **tmp =
             (struct TreeNode **)malloc(sizeof(struct TreeNode *) * arr_sz);
@@ -34,7 +39,8 @@ void flatten(struct TreeNode *root) {
       ptr = ptr->left;
     }
 
-    if (nstack == 0) {
+    if (nstack == 0)
+    {
       break;
     }
     ptr = stack[--nstack]->right;
@@ -42,7 +48,8 @@ void flatten(struct TreeNode *root) {
 
   struct TreeNode head;
   struct TreeNode *p = &head;
-  for (int i = 0; i < narr; i++) {
+  for (int i = 0; i < narr; i++)
+  {
     arr[i]->left = arr[i]->right = NULL;
     p->right = arr[i];
     p = p->right;

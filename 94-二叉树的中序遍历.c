@@ -1,13 +1,16 @@
 #include <stdlib.h>
 
-struct TreeNode {
+struct TreeNode
+{
   int val;
   struct TreeNode *left;
   struct TreeNode *right;
 };
 
-void dps(struct TreeNode *node, int *arr, int *n) {
-  if (node == NULL) {
+void dps(struct TreeNode *node, int *arr, int *n)
+{
+  if (node == NULL)
+  {
     return;
   }
 
@@ -20,7 +23,8 @@ void dps(struct TreeNode *node, int *arr, int *n) {
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
-int *inorderTraversal(struct TreeNode *root, int *returnSize) {
+int *inorderTraversal(struct TreeNode *root, int *returnSize)
+{
   int *arr = malloc(sizeof(int) * 100);
   int n = 0;
   dps(root, arr, &n);
@@ -28,9 +32,10 @@ int *inorderTraversal(struct TreeNode *root, int *returnSize) {
   return arr;
 }
 
-
-void po_dps(struct TreeNode *node, int *arr, int *n) {
-  if (node == NULL) {
+void po_dps(struct TreeNode *node, int *arr, int *n)
+{
+  if (node == NULL)
+  {
     return;
   }
 
@@ -43,7 +48,8 @@ void po_dps(struct TreeNode *node, int *arr, int *n) {
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
-int* postorderTraversal(struct TreeNode* root, int* returnSize){
+int *postorderTraversal(struct TreeNode *root, int *returnSize)
+{
   int *arr = malloc(sizeof(int) * 100);
   int n = 0;
   po_dps(root, arr, &n);

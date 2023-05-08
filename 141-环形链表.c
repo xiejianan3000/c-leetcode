@@ -6,7 +6,8 @@
 /*
  * 实现双向循环链表
  */
-struct list_head {
+struct list_head
+{
   struct list_head *prev, *next;
 };
 #define CONTAINER_OF(ptr, type, member)                                        \
@@ -21,29 +22,36 @@ struct list_head {
 /*
  * 实现简易哈希表
  */
-struct hashtable {
+struct hashtable
+{
   struct list_head heads[1000];
 };
 
-struct hash_entry {
+struct hash_entry
+{
   struct list_head head;
   int key;
   int val;
 };
 
-void hashtable_init(struct hashtable *ht) {
-  for (int i = 0; i < 1000; i++) {
+void hashtable_init(struct hashtable *ht)
+{
+  for (int i = 0; i < 1000; i++)
+  {
     list_head_init(&ht->heads[i]);
   }
 }
 
-struct hash_entry *ht_find(struct hashtable *h, int key) {
+struct hash_entry *ht_find(struct hashtable *h, int key)
+{
   struct list_head *head = &h->heads[key % 1000];
 
   struct list_head *p = head->next;
-  while (p != head) {
+  while (p != head)
+  {
     struct hash_entry *e = list_entry(p, struct hash_entry, head);
-    if (e->key == key) {
+    if (e->key == key)
+    {
       return e;
     }
     p = p->next;
@@ -51,7 +59,8 @@ struct hash_entry *ht_find(struct hashtable *h, int key) {
   return NULL;
 }
 
-void ht_add(struct hashtable *h, int key, int val) {
+void ht_add(struct hashtable *h, int key, int val)
+{
   struct hash_entry *hashe = malloc(sizeof(struct hash_entry));
   hashe->key = key;
   hashe->val = val;
@@ -61,13 +70,16 @@ void ht_add(struct hashtable *h, int key, int val) {
   list_add_head(&hashe->head, head);
 }
 
-void ht_del(struct hashtable *h, int key) {
+void ht_del(struct hashtable *h, int key)
+{
   struct list_head *head = &h->heads[key % 1000];
 
   struct list_head *p = head->next;
-  while (p != head) {
+  while (p != head)
+  {
     struct hash_entry *e = list_entry(p, struct hash_entry, head);
-    if (e->key == key) {
+    if (e->key == key)
+    {
       list_del(&e->head);
       free(e);
       break;
@@ -76,22 +88,28 @@ void ht_del(struct hashtable *h, int key) {
   }
 }
 
-struct ListNode {
+struct ListNode
+{
   int val;
   struct ListNode *next;
 };
 
-bool hasCycle(struct ListNode *head) {
+bool hasCycle(struct ListNode *head)
+{
   struct hashtable ht;
   hashtable_init(&ht);
 
-  while (head) {
+  while (head)
+  {
     head = head->next;
     unsigned int n = (unsigned int)head;
     struct hash_entry *e = ht_find(&ht, n);
-    if (e == NULL) {
+    if (e == NULL)
+    {
       ht_add(&ht, n, 0);
-    } else {
+    }
+    else
+    {
       return true;
     }
   }

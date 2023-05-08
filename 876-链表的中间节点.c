@@ -3,20 +3,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct ListNode {
+struct ListNode
+{
   int val;
   struct ListNode *next;
 };
 
-struct ListNode *middleNode(struct ListNode *head) {
+struct ListNode *middleNode(struct ListNode *head)
+{
   struct ListNode *arr[200];
   int n = 0;
 
-  if (head == NULL) {
+  if (head == NULL)
+  {
     return NULL;
   }
 
-  for (; head; head = head->next) {
+  for (; head; head = head->next)
+  {
     arr[n++] = head;
   }
 

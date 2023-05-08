@@ -1,20 +1,28 @@
 #include <stdio.h>
 
-int searchInsert(int *nums, int numsSize, int target) {
+int searchInsert(int *nums, int numsSize, int target)
+{
   int i = 0, j = numsSize - 1;
   int ans = 0;
-  while (i <= j) {
+  while (i <= j)
+  {
     int mid = (i + j) / 2;
-    if (target == nums[mid]) {
+    if (target == nums[mid])
+    {
       ans = mid;
       break;
-    } else if (target < nums[mid]) {
+    }
+    else if (target < nums[mid])
+    {
       j = mid - 1;
-    } else {
+    }
+    else
+    {
       i = mid + 1;
     }
   }
-  if (i > j) {
+  if (i > j)
+  {
     ans = i;
   }
 

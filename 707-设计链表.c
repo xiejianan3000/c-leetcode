@@ -1,44 +1,38 @@
 
 
-#include "common.h"
 #include <stdlib.h>
 
-typedef struct dlist
-{
+#include "common.h"
+
+typedef struct dlist {
   struct dlist *prev, *next;
   int val;
 } MyLinkedList;
 
-MyLinkedList *myLinkedListCreate()
-{
+MyLinkedList *myLinkedListCreate() {
   MyLinkedList *head = (MyLinkedList *)malloc(sizeof(MyLinkedList));
   head->prev = head;
   head->next = head;
   return head;
 }
 
-int myLinkedListGet(MyLinkedList *obj, int index)
-{
+int myLinkedListGet(MyLinkedList *obj, int index) {
   MyLinkedList *p = obj->next;
 
-  for (; p != obj; p = p->next)
-  {
-    if (index-- == 0)
-    {
+  for (; p != obj; p = p->next) {
+    if (index-- == 0) {
       break;
     }
   }
 
-  if (p == obj)
-  {
+  if (p == obj) {
     return -1;
   }
 
   return p->val;
 }
 
-void myLinkedListAddAtHead(MyLinkedList *obj, int val)
-{
+void myLinkedListAddAtHead(MyLinkedList *obj, int val) {
   MyLinkedList *e = (MyLinkedList *)malloc(sizeof(MyLinkedList));
   e->val = val;
   e->prev = obj;
@@ -47,8 +41,7 @@ void myLinkedListAddAtHead(MyLinkedList *obj, int val)
   obj->next = e;
 }
 
-void myLinkedListAddAtTail(MyLinkedList *obj, int val)
-{
+void myLinkedListAddAtTail(MyLinkedList *obj, int val) {
   MyLinkedList *e = (MyLinkedList *)malloc(sizeof(MyLinkedList));
   e->val = val;
   e->prev = obj->prev;
@@ -57,24 +50,19 @@ void myLinkedListAddAtTail(MyLinkedList *obj, int val)
   obj->prev = e;
 }
 
-void myLinkedListAddAtIndex(MyLinkedList *obj, int index, int val)
-{
+void myLinkedListAddAtIndex(MyLinkedList *obj, int index, int val) {
   MyLinkedList *p = obj->next;
 
-  while (p != obj)
-  {
-    if (index-- == 0)
-    {
+  while (p != obj) {
+    if (index-- == 0) {
       break;
     }
 
     p = p->next;
   }
 
-  if (p != obj || (p == obj && index == 0))
-  {
-    if (index == 0)
-    {
+  if (p != obj || (p == obj && index == 0)) {
+    if (index == 0) {
       p = obj;
     }
 
@@ -87,22 +75,18 @@ void myLinkedListAddAtIndex(MyLinkedList *obj, int index, int val)
   }
 }
 
-void myLinkedListDeleteAtIndex(MyLinkedList *obj, int index)
-{
+void myLinkedListDeleteAtIndex(MyLinkedList *obj, int index) {
   MyLinkedList *p = obj->next;
 
-  while (p != obj)
-  {
-    if (index-- == 0)
-    {
+  while (p != obj) {
+    if (index-- == 0) {
       break;
     }
 
     p = p->next;
   }
 
-  if (p == obj)
-  {
+  if (p == obj) {
     return;
   }
 
@@ -112,12 +96,10 @@ void myLinkedListDeleteAtIndex(MyLinkedList *obj, int index)
   p->next = NULL;
 }
 
-void myLinkedListFree(MyLinkedList *obj)
-{
+void myLinkedListFree(MyLinkedList *obj) {
   MyLinkedList *p = obj->next;
 
-  while (p != obj)
-  {
+  while (p != obj) {
     MyLinkedList *n = p->next;
     free(p);
     p = n;

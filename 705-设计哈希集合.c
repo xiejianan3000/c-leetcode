@@ -3,52 +3,42 @@
 
 #define LEN 1000001
 
-struct hlist_node
-{
+struct hlist_node {
   int key;
   struct hlist_node **pprev, *next;
 };
 
-struct hlist_head
-{
+struct hlist_head {
   struct hlist_node *first;
 };
 
-typedef struct
-{
+typedef struct {
   struct hlist_head arr[1000];
 } MyHashSet;
 
-MyHashSet *myHashSetCreate()
-{
+MyHashSet *myHashSetCreate() {
   MyHashSet *obj = (MyHashSet *)malloc(sizeof(MyHashSet));
 
-  for (int i = 0; i < 1000; i++)
-  {
+  for (int i = 0; i < 1000; i++) {
     obj->arr[i].first = NULL;
   }
 
   return obj;
 }
 
-bool myHashSetContains(MyHashSet *obj, int key)
-{
+bool myHashSetContains(MyHashSet *obj, int key) {
   struct hlist_head *head = &obj->arr[key % 1000];
 
-  for (struct hlist_node *e = head->first; e; e = e->next)
-  {
-    if (e->key == key)
-    {
+  for (struct hlist_node *e = head->first; e; e = e->next) {
+    if (e->key == key) {
       return true;
     }
   }
   return false;
 }
 
-void myHashSetAdd(MyHashSet *obj, int key)
-{
-  if (myHashSetContains(obj, key) == true)
-  {
+void myHashSetAdd(MyHashSet *obj, int key) {
+  if (myHashSetContains(obj, key) == true) {
     return;
   }
 
@@ -59,22 +49,18 @@ void myHashSetAdd(MyHashSet *obj, int key)
   entry->key = key;
 
   entry->next = head->first;
-  if (head->first)
-  {
+  if (head->first) {
     head->first->pprev = &entry->next;
   }
   entry->pprev = &head->first;
   head->first = entry;
 }
 
-void myHashSetRemove(MyHashSet *obj, int key)
-{
+void myHashSetRemove(MyHashSet *obj, int key) {
   struct hlist_head *head = &obj->arr[key % 1000];
 
-  for (struct hlist_node *e = head->first; e; e = e->next)
-  {
-    if (e->key == key)
-    {
+  for (struct hlist_node *e = head->first; e; e = e->next) {
+    if (e->key == key) {
       *e->pprev = e->next;
     }
   }

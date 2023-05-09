@@ -1,24 +1,22 @@
 
-#include "common.h"
 #include <stdlib.h>
 
-struct TreeNode
-{
+#include "common.h"
+
+struct TreeNode {
   int val;
   struct TreeNode *left;
   struct TreeNode *right;
 };
 
-typedef struct
-{
+typedef struct {
   int *arr;
   int n;
   int sz;
   int next;
 } BSTIterator;
 
-BSTIterator *bSTIteratorCreate(struct TreeNode *root)
-{
+BSTIterator *bSTIteratorCreate(struct TreeNode *root) {
   BSTIterator *obj = (BSTIterator *)malloc(sizeof(BSTIterator));
   obj->arr = (int *)malloc(sizeof(int) * 1024);
   obj->n = 0;
@@ -31,12 +29,9 @@ BSTIterator *bSTIteratorCreate(struct TreeNode *root)
 
   struct TreeNode *p = root;
 
-  while (1)
-  {
-    while (p)
-    {
-      if (nstack == stack_sz)
-      {
+  while (1) {
+    while (p) {
+      if (nstack == stack_sz) {
         stack_sz *= 2;
         struct TreeNode **tmp =
             (struct TreeNode **)malloc(sizeof(void *) * stack_sz);
@@ -48,13 +43,11 @@ BSTIterator *bSTIteratorCreate(struct TreeNode *root)
       stack[nstack++] = p;
       p = p->left;
     }
-    if (nstack == 0)
-    {
+    if (nstack == 0) {
       break;
     }
     struct TreeNode *tmp = stack[--nstack];
-    if (obj->sz == obj->n)
-    {
+    if (obj->sz == obj->n) {
       obj->sz *= 2;
       int *tmp = (int *)malloc(sizeof(int) * obj->sz);
       memcpy(tmp, obj->arr, sizeof(int) * obj->n);
@@ -72,8 +65,7 @@ int bSTIteratorNext(BSTIterator *obj) { return obj->arr[obj->next++]; }
 
 bool bSTIteratorHasNext(BSTIterator *obj) { return obj->next < obj->n; }
 
-void bSTIteratorFree(BSTIterator *obj)
-{
+void bSTIteratorFree(BSTIterator *obj) {
   free(obj->arr);
   free(obj);
 }

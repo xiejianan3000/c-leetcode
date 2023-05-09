@@ -4,19 +4,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct ListNode
-{
+struct ListNode {
   int val;
   struct ListNode *next;
 };
 
-int *reversePrint(struct ListNode *head, int *returnSize)
-{
+int *reversePrint(struct ListNode *head, int *returnSize) {
   int *arr = (int *)malloc(sizeof(int) * 10000);
   int n = 0;
 
-  for (; head; head = head->next)
-  {
+  for (; head; head = head->next) {
     arr[n++] = head->val;
   }
 
@@ -24,8 +21,7 @@ int *reversePrint(struct ListNode *head, int *returnSize)
 
   int i = 0, j = n - 1;
 
-  while (i < j)
-  {
+  while (i < j) {
     int tmp = arr[i];
     arr[i] = arr[j];
     arr[j] = tmp;

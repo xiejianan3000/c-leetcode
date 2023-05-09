@@ -1,23 +1,19 @@
 
 #include "common.h"
 
-struct ListNode
-{
+struct ListNode {
   int val;
   struct ListNode *next;
 };
 
-struct TreeNode
-{
+struct TreeNode {
   int val;
   struct TreeNode *left;
   struct TreeNode *right;
 };
 
-struct TreeNode *dps(int *nums, int i, int j)
-{
-  if (i > j)
-  {
+struct TreeNode *dps(int *nums, int i, int j) {
+  if (i > j) {
     return NULL;
   }
 
@@ -29,16 +25,13 @@ struct TreeNode *dps(int *nums, int i, int j)
   return node;
 }
 
-struct TreeNode *sortedListToBST(struct ListNode *head)
-{
+struct TreeNode *sortedListToBST(struct ListNode *head) {
   int arr_sz = 1024;
   int narr = 0;
   int *arr = (int *)malloc(sizeof(int) * arr_sz);
 
-  while (head)
-  {
-    if (narr == arr_sz)
-    {
+  while (head) {
+    if (narr == arr_sz) {
       arr_sz *= 2;
       int *buf = (int *)malloc(sizeof(int) * arr_sz);
       assert(buf);

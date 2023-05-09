@@ -1,31 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct ListNode
-{
+struct ListNode {
   int val;
   struct ListNode *next;
 };
 
-struct ListNode *deleteDuplicates(struct ListNode *head)
-{
-  if (head == NULL)
-  {
+struct ListNode *deleteDuplicates(struct ListNode *head) {
+  if (head == NULL) {
     return NULL;
   }
 
   struct ListNode *slow = head, *fast = head->next;
 
-  while (fast)
-  {
-    if (slow->val != fast->val)
-    {
+  while (fast) {
+    if (slow->val != fast->val) {
       slow->next = fast;
       slow = slow->next;
       fast = fast->next;
-    }
-    else
-    {
+    } else {
       fast = fast->next;
     }
   }
